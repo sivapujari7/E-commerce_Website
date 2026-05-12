@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>XStore Ecommerce</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav class="navbar">
+
+  <div class="logo">
+    XStore
+  </div>
+
+  <!-- SEARCH -->
+
+  <div class="search-box">
+
+    <input 
+      type="text" 
+      id="search-input"
+      placeholder="Search Products..."
+      onkeyup="searchProducts()"
+    >
+
+  </div>
+
+  <ul class="nav-links">
+
+    <li><a href="#">Home</a></li>
+
+    <li>
+  <a href="#" onclick="toggleCart()">
+    Cart 🛒
+    <span id="cart-count">0</span>
+  </a>
+</li>
+
+    <li>
+      <button onclick="openLogin()">
+        Login
+      </button>
+    </li>
+<li>
+  <button onclick="toggleTheme()">
+    🌙
+  </button>
+</li>
+<li>
+  <button onclick="openAdmin()">
+    Admin
+  </button>
+</li>
+  </ul>
+
+</nav>
+
+  <!-- HERO SECTION -->
+
+  <section class="hero">
+
+    <div class="hero-text">
+      <h1>Modern Ecommerce Website</h1>
+
+      <p>
+        Buy Trending Products With Amazing Offers
+      </p>
+
+      <button>
+        Shop Now
+      </button>
+    </div>
+
+  </section>
+
+ 
+
+      <!-- PRODUCTS -->
+
+<section class="products">
+
+  <h2>Trending Products</h2>
+
+  <div class="product-container">
+
+    <!-- PRODUCT 1 -->
+
+    <div class="product-card" data-name="Nike Shoes">
+
+      <div class="wishlist" onclick="toggleWishlist(this)">
+        ❤️
+      </div>
+
+      <img src="images/shoe.jpg" alt="Nike Shoes">
+
+      <h3>Nike Shoes</h3>
+
+      <div class="rating">
+        ⭐⭐⭐⭐⭐
+      </div>
+
+      <p>₹2999</p>
+
+<div class="stock">
+  Stock: <span class="stock-count">5</span>
+</div>
+
+      <button onclick="buyProduct(this,'Nike Shoes',2999)">
+  Add To Cart
+</button>
+
+      <button class="details-btn"
+        onclick="openDetails(
+          'Nike Shoes',
+          'Premium stylish running shoes',
+          '₹2999',
+          'images/shoe.jpg'
+        )">
+
+        View Details
+
+      </button>
+
+    </div>
+
+    <!-- PRODUCT 2 -->
+
+    <div class="product-card" data-name="Smart Watch">
+
+      <div class="wishlist" onclick="toggleWishlist(this)">
+        ❤️
+      </div>
+
+      <img src="images/watch.jpg" alt="Smart Watch">
+
+      <h3>Smart Watch</h3>
+
+      <div class="rating">
+        ⭐⭐⭐⭐☆
+      </div>
+
+      <p>₹1999</p>
+
+<div class="stock">
+  Stock: <span class="stock-count">3</span>
+</div>
+
+      <button onclick="buyProduct(this,'Smart Watch',1999)">
+  Add To Cart
+</button>
+      <button class="details-btn"
+        onclick="openDetails(
+          'Smart Watch',
+          'Modern smartwatch with premium features',
+          '₹1999',
+          'images/watch.jpg'
+        )">
+
+        View Details
+
+      </button>
+
+    </div>
+
+    <!-- PRODUCT 3 -->
+
+    <div class="product-card" data-name="Headphones">
+
+      <div class="wishlist" onclick="toggleWishlist(this)">
+        ❤️
+      </div>
+
+      <img src="images/headphone.jpg" alt="Headphones">
+
+      <h3>Headphones</h3>
+
+      <div class="rating">
+        ⭐⭐⭐⭐⭐
+      </div>
+
+<p>₹1499</p>
+
+<div class="stock">
+  Stock: <span class="stock-count">7</span>
+</div>
+      <button onclick="buyProduct(this,'Headphones',1499)">
+  Add To Cart
+</button>
+
+      <button class="details-btn"
+        onclick="openDetails(
+          'Headphones',
+          'High quality gaming headphones',
+          '₹1499',
+          'images/headphone.jpg'
+        )">
+
+        View Details
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+            <!-- CART SIDEBAR -->
+
+<div class="cart-sidebar" id="cart-sidebar">
+
+  <h2>Your Cart</h2>
+
+  <div id="cart-items">
+
+  </div>
+
+  <h3 id="total-price">
+  Total: ₹0
+</h3>
+
+<button class="checkout-btn" onclick="openPayment()">
+  Checkout
+</button>
+
+</div>
+           <!-- LOGIN POPUP -->
+
+<div class="popup" id="login-popup">
+
+  <div class="popup-content">
+
+    <span class="close-btn" onclick="closeLogin()">
+      ✖
+    </span>
+
+    <h2>Login</h2>
+
+    <input type="email" placeholder="Enter Email">
+
+    <input type="password" placeholder="Enter Password">
+
+    <button>
+      Login
+    </button>
+
+    <p>
+      Don't have account?
+      <span onclick="openRegister()">
+        Register
+      </span>
+    </p>
+
+  </div>
+
+</div>
+
+        <!-- REGISTER POPUP -->
+
+<div class="popup" id="register-popup">
+
+  <div class="popup-content">
+
+    <span class="close-btn" onclick="closeRegister()">
+      ✖
+    </span>
+
+    <h2>Register</h2>
+
+    <input type="text" placeholder="Enter Name">
+
+    <input type="email" placeholder="Enter Email">
+
+    <input type="password" placeholder="Enter Password">
+
+    <button>
+      Register
+    </button>
+
+  </div>
+
+</div>
+<!-- PAYMENT POPUP -->
+
+<div class="popup" id="payment-popup">
+
+  <div class="popup-content">
+
+    <span class="close-btn" onclick="closePayment()">
+      ✖
+    </span>
+
+    <h2>Select Payment Method</h2>
+
+    <div class="payment-options">
+
+      <button onclick="payNow('PhonePe')">
+        PhonePe
+      </button>
+
+      <button onclick="payNow('Paytm')">
+        Paytm
+      </button>
+
+      <button onclick="payNow('Cash On Delivery')">
+        Cash On Delivery
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+<!-- PRODUCT DETAILS -->
+
+<div class="popup" id="details-popup">
+
+  <div class="popup-content">
+
+    <span class="close-btn"
+      onclick="closeDetails()">
+
+      ✖
+
+    </span>
+
+    <img id="details-image"
+      class="details-image">
+
+    <h2 id="details-title"></h2>
+
+    <p id="details-description"></p>
+
+    <h3 id="details-price"></h3>
+
+  </div>
+
+</div>
+<!-- ADMIN PANEL -->
+
+<div class="popup" id="admin-popup">
+
+  <div class="popup-content">
+
+    <span class="close-btn"
+      onclick="closeAdmin()">
+
+      ✖
+
+    </span>
+
+    <h2>Admin Dashboard</h2>
+
+    <input type="text"
+      id="product-name"
+      placeholder="Product Name">
+
+    <input type="number"
+      id="product-price"
+      placeholder="Product Price">
+
+    <input type="number"
+      id="product-stock"
+      placeholder="Product Stock">
+
+    <input type="text"
+      id="product-image"
+      placeholder="Image Path Example: images/shoe.jpg">
+
+    <button onclick="addNewProduct()">
+      Add Product
+    </button>
+
+  </div>
+
+</div>
+  <!-- FOOTER -->
+
+  <footer>
+
+    <p>
+      © 2026 XStore Ecommerce Website
+    </p>
+
+  </footer>
+
+</body>
+</html>
