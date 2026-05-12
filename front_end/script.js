@@ -1,3 +1,4 @@
+const API_URL = "https://e-commerce-backend-eubt.onrender.com";
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 // ADD TO CART
@@ -366,5 +367,47 @@ function toggleWishlist(element){
 function toggleTheme(){
 
   document.body.classList.toggle("light-mode");
+
+}
+async function registerUser() {
+
+  const name = document.getElementById("register-name").value;
+
+  const email = document.getElementById("register-email").value;
+
+  const password = document.getElementById("register-password").value;
+
+  try {
+
+    const response = await fetch(`${API_URL}/api/auth/register`, {
+
+      method: "POST",
+
+      headers: {
+
+        "Content-Type": "application/json"
+
+      },
+
+      body: JSON.stringify({
+
+        name,
+        email,
+        password
+
+      })
+
+    });
+
+    const data = await response.json();
+
+    alert(data.message);
+
+  }
+  catch(error){
+
+    console.log(error);
+
+  }
 
 }
