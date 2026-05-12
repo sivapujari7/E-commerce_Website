@@ -1,413 +1,66 @@
-const API_URL = "https://e-commerce-backend-eubt.onrender.com";
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const express = require("express");
 
-// ADD TO CART
+const cors = require("cors");
 
-function addToCart(name, price){
+const mongoose = require("mongoose");
 
-  let existing = cart.find(item => item.name === name);
+const authRoutes = require("./routes/authRoutes");
 
-  if(existing){
+require("dotenv").config();
 
-    existing.quantity++;
+const app = express();
 
-  }
-  else{
 
-    cart.push({
-      name:name,
-      price:price,
-      quantity:1
-    });
+// CORS FIX
 
-  }
+app.use(cors({
+  origin: "*"
+}));
 
-  saveCart();
 
-  updateCart();
+// MIDDLEWARE
 
-  showToast("Product Added To Cart");
+app.use(express.json());
 
-}
-// BUY PRODUCT WITH STOCK
 
-function buyProduct(button,name,price){
+// ROUTES
 
-  let stockElement = button.parentElement
-    .querySelector(".stock-count");
+app.use("/api/auth", authRoutes);
 
-  let stock = parseInt(stockElement.innerText);
 
-  if(stock <= 0){
+// TEST ROUTE
 
-    showToast("Out Of Stock");
+app.get("/", (req,res)=>{
 
-    return;
+  res.send("Backend Running Successfully");
 
-  }
+});
 
-  stock--;
 
-  stockElement.innerText = stock;
+// DATABASE CONNECTION
 
-  if(stock === 0){
+mongoose.connect(process.env.MONGO_URI)
+.then(()=>{
 
-    button.innerText = "Out Of Stock";
+  console.log("MongoDB Connected");
 
-    button.disabled = true;
+})
+.catch((error)=>{
 
-    button.classList.add("out-stock");
+  console.log(error);
 
-  }
+});
 
-  addToCart(name,price);
 
-}
+// PORT
 
-// UPDATE CART
+const PORT = process.env.PORT || 5000;
 
-function updateCart(){
 
-  let cartCount = document.getElementById("cart-count");
+// SERVER
 
-  let cartItems = document.getElementById("cart-items");
+app.listen(PORT, ()=>{
 
-  let totalPrice = document.getElementById("total-price");
+  console.log(`Server Running On Port ${PORT}`);
 
-  cartCount.innerText = cart.length;
-
-  cartItems.innerHTML = "";
-
-  let total = 0;
-
-  cart.forEach((item,index)=>{
-
-    total += item.price * item.quantity;
-
-    cartItems.innerHTML += `
-
-      <div class="cart-item">
-
-        <h4>${item.name}</h4>
-
-        <p>₹${item.price}</p>
-
-        <div class="quantity-controls">
-
-          <button onclick="decreaseQuantity(${index})">
-            -
-          </button>
-
-          <span>${item.quantity}</span>
-
-          <button onclick="increaseQuantity(${index})">
-            +
-          </button>
-
-        </div>
-
-        <button class="remove-btn"
-          onclick="removeItem(${index})">
-
-          Remove
-
-        </button>
-
-      </div>
-
-    `;
-  });
-
-  totalPrice.innerText = `Total: ₹${total}`;
-
-}
-
-// INCREASE
-
-function increaseQuantity(index){
-
-  cart[index].quantity++;
-
-  saveCart();
-
-  updateCart();
-
-}
-
-// DECREASE
-
-function decreaseQuantity(index){
-
-  if(cart[index].quantity > 1){
-
-    cart[index].quantity--;
-
-  }
-  else{
-
-    cart.splice(index,1);
-
-  }
-
-  saveCart();
-
-  updateCart();
-
-}
-
-// REMOVE ITEM
-
-function removeItem(index){
-
-  cart.splice(index,1);
-
-  saveCart();
-
-  updateCart();
-
-}
-
-// SAVE LOCAL STORAGE
-
-function saveCart(){
-
-  localStorage.setItem(
-    "cart",
-    JSON.stringify(cart)
-  );
-
-}
-
-// CART SIDEBAR
-
-function toggleCart(){
-
-  let sidebar = document.getElementById("cart-sidebar");
-
-  if(sidebar.style.right === "0px"){
-
-    sidebar.style.right = "-400px";
-
-  }
-  else{
-
-    sidebar.style.right = "0px";
-
-  }
-
-}
-
-// LOGIN
-
-function openLogin(){
-
-  document.getElementById("login-popup").style.display = "flex";
-
-}
-
-function closeLogin(){
-
-  document.getElementById("login-popup").style.display = "none";
-
-}
-
-// REGISTER
-
-function openRegister(){
-
-  closeLogin();
-
-  document.getElementById("register-popup").style.display = "flex";
-
-}
-
-function closeRegister(){
-
-  document.getElementById("register-popup").style.display = "none";
-
-}
-
-// SEARCH
-
-function searchProducts(){
-
-  let input = document
-    .getElementById("search-input")
-    .value
-    .toLowerCase();
-
-  let products = document.querySelectorAll(".product-card");
-
-  products.forEach((product)=>{
-
-    let name = product.dataset.name.toLowerCase();
-
-    if(name.includes(input)){
-
-      product.style.display = "block";
-
-    }
-    else{
-
-      product.style.display = "none";
-
-    }
-
-  });
-
-}
-
-// PAYMENT
-
-function openPayment(){
-
-  document.getElementById("payment-popup").style.display = "flex";
-
-}
-
-function closePayment(){
-
-  document.getElementById("payment-popup").style.display = "none";
-
-}
-
-function payNow(method){
-
-  alert("Payment Successful Using " + method);
-
-  cart = [];
-
-  saveCart();
-
-  updateCart();
-
-  closePayment();
-
-}
-
-// TOAST
-
-function showToast(message){
-
-  let toast = document.createElement("div");
-
-  toast.innerText = message;
-
-  toast.style.position = "fixed";
-  toast.style.bottom = "20px";
-  toast.style.right = "20px";
-  toast.style.background = "#22d3ee";
-  toast.style.color = "black";
-  toast.style.padding = "15px 25px";
-  toast.style.borderRadius = "10px";
-  toast.style.zIndex = "999";
-
-  document.body.appendChild(toast);
-
-  setTimeout(()=>{
-
-    toast.remove();
-
-  },2000);
-
-}
-
-// INITIAL LOAD
-
-updateCart();
-// PRODUCT DETAILS
-
-function openDetails(title, description, price, image){
-
-  document.getElementById("details-popup")
-    .style.display = "flex";
-
-  document.getElementById("details-title")
-    .innerText = title;
-
-  document.getElementById("details-description")
-    .innerText = description;
-
-  document.getElementById("details-price")
-    .innerText = price;
-
-  document.getElementById("details-image")
-    .src = image;
-
-}
-
-function closeDetails(){
-
-  document.getElementById("details-popup")
-    .style.display = "none";
-
-}
-
-// WISHLIST
-
-function toggleWishlist(element){
-
-  if(element.innerText === "❤️"){
-
-    element.innerText = "💖";
-
-    showToast("Added To Wishlist");
-
-  }
-  else{
-
-    element.innerText = "❤️";
-
-  }
-
-}
-
-// DARK MODE
-
-function toggleTheme(){
-
-  document.body.classList.toggle("light-mode");
-
-}
-async function registerUser() {
-
-  const name = document.getElementById("register-name").value;
-
-  const email = document.getElementById("register-email").value;
-
-  const password = document.getElementById("register-password").value;
-
-  try {
-
-    const response = await fetch(`${API_URL}/api/auth/register`, {
-
-      method: "POST",
-
-      headers: {
-
-        "Content-Type": "application/json"
-
-      },
-
-      body: JSON.stringify({
-
-        name,
-        email,
-        password
-
-      })
-
-    });
-
-    const data = await response.json();
-
-    alert(data.message);
-
-  }
-  catch(error){
-
-    console.log(error);
-
-  }
-
-}
+});
