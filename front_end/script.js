@@ -471,3 +471,54 @@ async function loginUser(){
   }
 
 }
+function checkLogin(){
+
+  const token = localStorage.getItem("token");
+
+  const loginButton =
+    document.getElementById("login-btn");
+
+  if(token){
+
+    loginButton.innerText = "Logout";
+
+    loginButton.onclick = logoutUser;
+
+  }
+
+}
+function logoutUser(){
+
+  localStorage.removeItem("token");
+
+  showToast("Logged Out");
+
+  location.reload();
+
+}
+function checkLogin(){
+
+  const token = localStorage.getItem("token");
+
+  const loginButton =
+    document.getElementById("login-btn");
+
+  if(token){
+
+    loginButton.innerText = "Logout";
+
+    loginButton.onclick = logoutUser;
+
+  }
+
+}
+function logoutUser(){
+
+  localStorage.removeItem("token");
+
+  showToast("Logged Out");
+
+  location.reload();
+
+}
+checkLogin();
