@@ -7,7 +7,8 @@ const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
 
 require("dotenv").config();
-
+const productRoutes =
+  require("./routes/productRoutes");
 const app = express();
 const productRoutes = require("./routes/productRoutes");
 
@@ -21,6 +22,7 @@ app.use(express.json());
 // ROUTES
 
 app.use("/api/auth", authRoutes);
+app.use("/api/products", productRoutes);
 app.use("/api/products", productRoutes);
 
 // TEST ROUTE
