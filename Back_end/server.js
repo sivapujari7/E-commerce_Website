@@ -9,7 +9,7 @@ const authRoutes = require("./routes/authRoutes");
 require("dotenv").config();
 
 const app = express();
-
+const productRoutes = require("./routes/productRoutes");
 
 // MIDDLEWARE
 
@@ -21,7 +21,7 @@ app.use(express.json());
 // ROUTES
 
 app.use("/api/auth", authRoutes);
-
+app.use("/api/products", productRoutes);
 
 // TEST ROUTE
 

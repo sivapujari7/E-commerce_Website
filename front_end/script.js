@@ -548,3 +548,58 @@ function checkAdminAccess(){
   }
 
 }
+async function addNewProduct(){
+
+  const name =
+    document.getElementById("product-name").value;
+
+  const price =
+    document.getElementById("product-price").value;
+
+  const stock =
+    document.getElementById("product-stock").value;
+
+  const image =
+    document.getElementById("product-image").value;
+
+  try{
+
+    const response = await fetch(
+
+      `${API_URL}/api/products/add`,
+
+      {
+
+        method:"POST",
+
+        headers:{
+
+          "Content-Type":"application/json"
+
+        },
+
+        body:JSON.stringify({
+
+          name,
+          price,
+          stock,
+          image
+
+        })
+
+      }
+
+    );
+
+    const data = await response.json();
+
+    showToast(data.message);
+
+  }
+  catch(error){
+
+    console.log(error);
+
+  }
+
+}
