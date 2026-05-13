@@ -870,3 +870,55 @@ footer{
   }
 
 }
+/* PRODUCT PAGE MOBILE */
+
+@media(max-width:768px){
+
+  .product-page{
+
+    flex-direction:column;
+
+    padding:20px;
+
+  }
+
+  .main-product-image{
+
+    height:auto;
+
+  }
+
+  .product-info h1{
+
+    font-size:32px;
+
+  }
+
+  .product-info h2{
+
+    font-size:28px;
+
+  }
+
+  .slider-image{
+
+    width:80px;
+
+    height:80px;
+
+  }
+
+}
+/* MOBILE PRODUCT CARDS */
+
+@media(max-width:768px){
+
+  .product-card{
+
+    width:100%;
+
+    max-width:350px;
+
+  }
+
+}
