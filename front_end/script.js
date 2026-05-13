@@ -741,3 +741,9 @@ function openProductPage(product){
     "product.html";
 
 }
+function goToCategories(){
+
+  window.location.href =
+    "categories.html";
+
+}
