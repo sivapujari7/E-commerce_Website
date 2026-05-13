@@ -603,3 +603,69 @@ async function addNewProduct(){
   }
 
 }
+async function loadProducts(){
+
+  try{
+
+    const response = await fetch(
+
+      `${API_URL}/api/products`
+
+    );
+
+    const products = await response.json();
+
+    const container =
+      document.getElementById(
+        "product-container"
+      );
+
+    container.innerHTML = "";
+
+    products.forEach((product)=>{
+
+      container.innerHTML += `
+
+        <div class="product-card">
+
+          <img src="${product.image}" 
+            alt="${product.name}">
+
+          <h3>${product.name}</h3>
+
+          <p>₹${product.price}</p>
+
+          <div class="stock">
+            Stock:
+            <span class="stock-count">
+              ${product.stock}
+            </span>
+          </div>
+
+          <button onclick="
+            buyProduct(
+              this,
+              '${product.name}',
+              ${product.price}
+            )
+          ">
+
+            Add To Cart
+
+          </button>
+
+        </div>
+
+      `;
+
+    });
+
+  }
+  catch(error){
+
+    console.log(error);
+
+  }
+
+}
+loadProducts();
