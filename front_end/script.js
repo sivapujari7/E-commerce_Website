@@ -717,6 +717,7 @@ async function addNewProduct(){
     closeAdmin();
 
     loadProducts();
+  
 
   }
   catch(error){
@@ -724,5 +725,19 @@ async function addNewProduct(){
     console.log(error);
 
   }
+
+}
+function openProductPage(product){
+
+  localStorage.setItem(
+
+    "selectedProduct",
+
+    JSON.stringify(product)
+
+  );
+
+  window.location.href =
+    "product.html";
 
 }
