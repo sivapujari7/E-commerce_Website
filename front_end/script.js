@@ -460,7 +460,7 @@ async function loginUser(){
       );
 
       showToast("Login Successful");
-
+closeLogin();
     }
 
   }
