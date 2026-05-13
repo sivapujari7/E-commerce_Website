@@ -518,20 +518,45 @@ function checkAdminAccess(){
 
   const token = localStorage.getItem("token");
 
-  if(token){
+  const userEmail =
+    localStorage.getItem("userEmail");
+
+  if(!token){
+
+    showToast("Please Login First");
+
+    openLogin();
+
+    return;
+
+  }
+
+  if(userEmail !== "poojari.shiva1234@gmail.com"){
+
+    showToast("Access Denied");
+
+    return;
+
+  }
+
+  const adminPassword = 9154888854(
+    "Enter Admin Password"
+  );
+
+  if(adminPassword === "YOUR_PASSWORD"){
 
     openAdmin();
 
   }
   else{
 
-    showToast("Please Login First");
-
-    openLogin();
+    showToast("Wrong Admin Password");
 
   }
 
 }
+  
+
 async function addNewProduct(){
 
   const name =
