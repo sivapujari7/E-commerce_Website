@@ -527,6 +527,24 @@ function logoutUser(){
   showToast("Logged Out");
 
   location.reload();
-
+  
 }
 checkLogin();
+function checkAdminAccess(){
+
+  const token = localStorage.getItem("token");
+
+  if(token){
+
+    openAdmin();
+
+  }
+  else{
+
+    showToast("Please Login First");
+
+    openLogin();
+
+  }
+
+}
