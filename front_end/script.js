@@ -484,35 +484,6 @@ function checkLogin(){
 
   if(token){
 
-   const userEmail =
-  localStorage.getItem("userEmail");
-
-loginButton.innerText =
-  userEmail.split("@")[0];
-
-    loginButton.onclick = logoutUser;
-
-  }
-
-}
-function logoutUser(){
-
-  localStorage.removeItem("token");
-
-  showToast("Logged Out");
-
-  location.reload();
-  localStorage.removeItem("userEmail");
-}
-function checkLogin(){
-
-  const token = localStorage.getItem("token");
-
-  const loginButton =
-    document.getElementById("login-btn");
-
-  if(token){
-
     loginButton.innerText = "Logout";
 
     loginButton.onclick = logoutUser;
@@ -528,6 +499,19 @@ function logoutUser(){
 
   location.reload();
   
+}
+function openAdmin(){
+
+  document.getElementById("admin-popup")
+    .style.display = "flex";
+
+}
+
+function closeAdmin(){
+
+  document.getElementById("admin-popup")
+    .style.display = "none";
+
 }
 checkLogin();
 function checkAdminAccess(){
