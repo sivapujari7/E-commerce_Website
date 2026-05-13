@@ -11,16 +11,28 @@ router.post("/add", async (req,res)=>{
 
   try{
 
-    const {name,price,stock,image} = req.body;
+   const {
 
-    const newProduct = new Product({
+  name,
+  price,
+  stock,
+  mainImage,
+  images,
+  description,
+  category
 
-      name,
-      price,
-      stock,
-      image
+} = req.body;
+   const newProduct = new Product({
 
-    });
+  name,
+  price,
+  stock,
+  mainImage,
+  images,
+  description,
+  category
+
+});
 
     await newProduct.save();
 

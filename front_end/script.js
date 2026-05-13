@@ -583,12 +583,12 @@ async function loadProducts(){
 
         <div class="product-card">
 
-          <img src="${product.image}" 
+          <img src="${product.mainImage}" 
             alt="${product.name}">
 
           <h3>${product.name}</h3>
 
-          <p>₹${product.price}</p>
+         <p>${product.category}</p>
 
           <div class="stock">
             Stock:
@@ -608,7 +608,11 @@ async function loadProducts(){
             Add To Cart
 
           </button>
-
+<button onclick='openProductPage(
+  ${JSON.stringify(product)}
+)'>
+  View Details
+</button>
         </div>
 
       `;
@@ -624,3 +628,101 @@ async function loadProducts(){
 
 }
 loadProducts();
+async function addNewProduct(){
+
+  const name =
+    document.getElementById(
+      "product-name"
+    ).value;
+
+  const price =
+    document.getElementById(
+      "product-price"
+    ).value;
+
+  const stock =
+    document.getElementById(
+      "product-stock"
+    ).value;
+
+  const category =
+    document.getElementById(
+      "product-category"
+    ).value;
+
+  const description =
+    document.getElementById(
+      "product-description"
+    ).value;
+
+  const mainImage =
+    document.getElementById(
+      "product-main-image"
+    ).value;
+
+  const image1 =
+    document.getElementById(
+      "product-image1"
+    ).value;
+
+  const image2 =
+    document.getElementById(
+      "product-image2"
+    ).value;
+
+  const image3 =
+    document.getElementById(
+      "product-image3"
+    ).value;
+
+  try{
+
+    const response = await fetch(
+
+      `${API_URL}/api/products/add`,
+
+      {
+
+        method:"POST",
+
+        headers:{
+          "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+          name,
+          price,
+          stock,
+          category,
+          description,
+          mainImage,
+
+          images:[
+            image1,
+            image2,
+            image3
+          ]
+
+        })
+
+      }
+
+    );
+
+    const data = await response.json();
+
+    showToast(data.message);
+
+    closeAdmin();
+
+    loadProducts();
+
+  }
+  catch(error){
+
+    console.log(error);
+
+  }
+
+}
