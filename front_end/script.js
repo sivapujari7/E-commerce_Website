@@ -539,7 +539,7 @@ function checkAdminAccess(){
 
   }
 
-  const adminPassword = 9154888854(
+  const adminPassword = 9154(
     "Enter Admin Password"
   );
 
