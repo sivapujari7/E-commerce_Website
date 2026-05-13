@@ -458,6 +458,10 @@ async function loginUser(){
         data.token
 
       );
+      localStorage.setItem(
+  "userEmail",
+  email
+);
 
       showToast("Login Successful");
 closeLogin();
@@ -480,7 +484,11 @@ function checkLogin(){
 
   if(token){
 
-    loginButton.innerText = "Logout";
+   const userEmail =
+  localStorage.getItem("userEmail");
+
+loginButton.innerText =
+  userEmail.split("@")[0];
 
     loginButton.onclick = logoutUser;
 
@@ -494,7 +502,7 @@ function logoutUser(){
   showToast("Logged Out");
 
   location.reload();
-
+  localStorage.removeItem("userEmail");
 }
 function checkLogin(){
 
