@@ -411,3 +411,63 @@ async function registerUser() {
   }
 
 }
+async function loginUser(){
+
+  const email =
+    document.getElementById("login-email").value;
+
+  const password =
+    document.getElementById("login-password").value;
+
+  try{
+
+    const response = await fetch(
+
+      `${API_URL}/api/auth/login`,
+
+      {
+
+        method:"POST",
+
+        headers:{
+
+          "Content-Type":"application/json"
+
+        },
+
+        body:JSON.stringify({
+
+          email,
+          password
+
+        })
+
+      }
+
+    );
+
+    const data = await response.json();
+
+    alert(data.message);
+
+    if(data.token){
+
+      localStorage.setItem(
+
+        "token",
+        data.token
+
+      );
+
+      showToast("Login Successful");
+
+    }
+
+  }
+  catch(error){
+
+    console.log(error);
+
+  }
+
+}
