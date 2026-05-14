@@ -323,7 +323,7 @@ footer{
   align-items:center;
 }
 
-.popup-content{
+{
   background:#1e293b;
   padding:40px;
   border-radius:20px;
@@ -419,7 +419,7 @@ footer{
     flex-direction:column;
     gap:20px;
     padding:20px;
-  }
+  }.popup-content
 
   .hero-text h1{
     font-size:40px;
@@ -760,11 +760,23 @@ footer{
 }
 
 .popup-content{
-  background:#1e293b;
-  padding:40px;
+
+  background:#0f172a;
+
+  padding:30px;
+
   border-radius:20px;
-  width:350px;
+
+  width:90%;
+
+  max-width:450px;
+
+  max-height:90vh;
+
+  overflow-y:auto;
+
   position:relative;
+
 }
 
 .popup-content h2{
