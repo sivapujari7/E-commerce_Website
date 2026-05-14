@@ -323,12 +323,24 @@ footer{
   align-items:center;
 }
 
-{
+.popup-content{
+
   background:#1e293b;
-  padding:40px;
+
+  padding:30px;
+
   border-radius:20px;
-  width:350px;
+
+  width:90%;
+
+  max-width:450px;
+
+  max-height:90vh;
+
+  overflow-y:auto;
+
   position:relative;
+
 }
 
 .popup-content h2{
@@ -761,7 +773,7 @@ footer{
 
 .popup-content{
 
-  background:#0f172a;
+  background:#1e293b;
 
   padding:30px;
 
