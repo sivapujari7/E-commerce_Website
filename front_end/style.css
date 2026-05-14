@@ -1321,3 +1321,62 @@ footer{
   }
 
 }
+/* PRODUCT PAGE MOBILE */
+
+@media(max-width:768px){
+
+  .product-page{
+
+    flex-direction:column;
+
+    padding:20px;
+
+  }
+
+  .main-product-image{
+
+    width:100%;
+
+    height:350px;
+
+  }
+
+  .image-slider{
+
+    justify-content:center;
+
+  }
+
+  .slider-image{
+
+    width:80px;
+
+    height:80px;
+
+  }
+
+  .product-info{
+
+    text-align:center;
+
+  }
+
+  .product-info h1{
+
+    font-size:35px;
+
+  }
+
+  .product-info h2{
+
+    font-size:28px;
+
+  }
+
+  .product-info button{
+
+    width:100%;
+
+  }
+
+}

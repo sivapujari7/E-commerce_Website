@@ -29,7 +29,9 @@ const mainImage =
     "main-product-image"
   );
 
-mainImage.src = product.mainImage;
+mainImage.src =
+  product.mainImage ||
+  product.images[0];
 
 const slider =
   document.getElementById(

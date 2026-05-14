@@ -736,12 +736,11 @@ const isTrending =
           description,
           mainImage,
 
-          images:[
-            image1,
-            image2,
-            image3
-          ]
-
+       images:[
+  image1,
+  image2,
+  image3
+].filter(image => image !== "")
         })
 
       }
