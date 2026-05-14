@@ -587,7 +587,8 @@ async function loadProducts(){
 
       container.innerHTML += `
 
-        <div class="product-card">
+       <div class="product-card"
+  data-name="${product.name}">
 
           <img src="${product.mainImage}" 
             alt="${product.name}">
@@ -626,7 +627,8 @@ if(product.isTrending){
 
   trendingContainer.innerHTML += `
 
-    <div class="product-card">
+    <div class="product-card"
+  data-name="${product.name}">
 
       <img
         src="${product.mainImage}"
