@@ -33,9 +33,14 @@ const productSchema = new mongoose.Schema({
   },
 
   category:{
+   
     type:String,
     required:true
-  }
+  },
+  isTrending:{
+  type:Boolean,
+  default:false
+}
 
 });
 

@@ -575,7 +575,13 @@ async function loadProducts(){
         "product-container"
       );
 
+      const trendingContainer =
+  document.getElementById(
+    "trending-container"
+  );
+
     container.innerHTML = "";
+    trendingContainer.innerHTML = "";
 
     products.forEach((product)=>{
 
@@ -616,7 +622,31 @@ async function loadProducts(){
         </div>
 
       `;
+if(product.isTrending){
 
+  trendingContainer.innerHTML += `
+
+    <div class="product-card">
+
+      <img
+        src="${product.mainImage}"
+        alt="${product.name}">
+
+      <h3>${product.name}</h3>
+
+      <p>₹${product.price}</p>
+
+      <button onclick='openProductPage(
+        ${JSON.stringify(product)}
+      )'>
+        View Details
+      </button>
+
+    </div>
+
+  `;
+
+}
     });
 
   }
@@ -649,6 +679,11 @@ async function addNewProduct(){
     document.getElementById(
       "product-category"
     ).value;
+
+const isTrending =
+  document.getElementById(
+    "product-trending"
+  ).checked;
 
   const description =
     document.getElementById(
@@ -695,6 +730,7 @@ async function addNewProduct(){
           price,
           stock,
           category,
+          isTrending,
           description,
           mainImage,
 

@@ -1052,3 +1052,38 @@ footer{
   }
 
 }
+/* TRENDING CAT */
+
+.trending-cat{
+
+  display:flex;
+
+  justify-content:center;
+
+  margin-top:20px;
+
+}
+
+.trending-cat img{
+
+  width:220px;
+
+  animation:floatCat 3s ease-in-out infinite;
+
+}
+
+@keyframes floatCat{
+
+  0%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(-10px);
+  }
+
+  100%{
+    transform:translateY(0px);
+  }
+
+}
