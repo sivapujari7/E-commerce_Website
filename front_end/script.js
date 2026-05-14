@@ -747,3 +747,32 @@ function goToCategories(){
     "categories.html";
 
 }
+const heroVideo =
+  document.getElementById(
+    "hero-video"
+  );
+
+document.addEventListener(
+
+  "mousemove",
+
+  (e)=>{
+
+    const x =
+      (window.innerWidth / 2 - e.pageX)
+      / 40;
+
+    const y =
+      (window.innerHeight / 2 - e.pageY)
+      / 40;
+
+    heroVideo.style.transform =
+
+      `translate(-50%, -50%)
+       scale(1.1)
+       rotateY(${x}deg)
+       rotateX(${-y}deg)`;
+
+  }
+
+);
