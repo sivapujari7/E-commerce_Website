@@ -31,13 +31,14 @@ function addToCart(name, price){
 
 }
 // BUY PRODUCT WITH STOCK
-
-function buyProduct(button,name,price){
+function buyProduct(button,product){
 
   let stockElement = button.parentElement
     .querySelector(".stock-count");
 
-  let stock = parseInt(stockElement.innerText);
+  let stock = parseInt(
+    stockElement.innerText
+  );
 
   if(stock <= 0){
 
@@ -61,7 +62,7 @@ function buyProduct(button,name,price){
 
   }
 
-  addToCart(name,price);
+  addToCart(product);
 
 }
 
@@ -603,17 +604,14 @@ async function loadProducts(){
             </span>
           </div>
 
-          <button onclick="
-            buyProduct(
-              this,
-              '${product.name}',
-              ${product.price}
-            )
-          ">
+          <button onclick='buyProduct(
+  this,
+  ${JSON.stringify(product)}
+)'>
 
-            Add To Cart
+  Add To Cart
 
-          </button>
+</button>
 <button onclick='openProductPage(
   ${JSON.stringify(product)}
 )'>

@@ -484,8 +484,17 @@ footer{
 }
 
 body{
+
   background:#0f172a;
+
   color:white;
+
+  min-height:100vh;
+
+  display:flex;
+
+  flex-direction:column;
+
 }
 
 /* NAVBAR */
@@ -581,6 +590,7 @@ body{
 /* PRODUCTS */
 
 .products{
+  flex:1;
   padding:80px 50px;
 }
 
