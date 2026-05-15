@@ -115,4 +115,49 @@ router.delete(
   }
 
 );
+/* UPDATE PRODUCT */
+
+router.put(
+
+  "/update/:id",
+
+  async(req,res)=>{
+
+    try{
+
+      const updatedProduct =
+
+        await Product.findByIdAndUpdate(
+
+          req.params.id,
+
+          req.body,
+
+          { new:true }
+
+        );
+
+      res.status(200).json({
+
+        message:
+          "Product Updated",
+
+        updatedProduct
+
+      });
+
+    }
+    catch(error){
+
+      res.status(500).json({
+
+        message:error.message
+
+      });
+
+    }
+
+  }
+
+);
 module.exports = router;

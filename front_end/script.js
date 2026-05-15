@@ -1,3 +1,4 @@
+let editingProductId = null;
 const API_URL = "https://e-commerce-backend-eubt.onrender.com";
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -712,42 +713,91 @@ const isTrending =
 
   try{
 
-    const response = await fetch(
+    let response;
 
-      `${API_URL}/api/products/add`,
+if(editingProductId){
 
-      {
+  response = await fetch(
 
-        method:"POST",
+    `https://e-commerce-backend-eubt.onrender.com/api/products/update/${editingProductId}`,
 
-        headers:{
-          "Content-Type":"application/json"
-        },
+    {
 
-        body:JSON.stringify({
+      method:"PUT",
 
-          name,
-          price,
-          stock,
-          category,
-          isTrending,
-          description,
-          mainImage,
+      headers:{
+        "Content-Type":"application/json"
+      },
 
-       images:[
-  image1,
-  image2,
-  image3
-].filter(image => image !== "")
-        })
+      body:JSON.stringify({
 
-      }
+        name,
+        price,
+        stock,
+        category,
+        isTrending,
+        description,
+        mainImage,
 
-    );
+        images:[
+          image1,
+          image2,
+          image3
+        ].filter(image => image !== "")
+
+      })
+
+    }
+
+  );
+
+}
+else{
+
+  response = await fetch(
+
+    "https://e-commerce-backend-eubt.onrender.com/api/products/add",
+
+    {
+
+      method:"POST",
+
+      headers:{
+        "Content-Type":"application/json"
+      },
+
+      body:JSON.stringify({
+
+        name,
+        price,
+        stock,
+        category,
+        isTrending,
+        description,
+        mainImage,
+
+        images:[
+          image1,
+          image2,
+          image3
+        ].filter(image => image !== "")
+
+      })
+
+    }
+
+  );
+
+}
 
     const data = await response.json();
 
     showToast(data.message);
+    editingProductId = null;
+
+document.getElementById(
+  "admin-action-btn"
+).innerText = "Add Product";
 
     closeAdmin();
 
@@ -936,40 +986,54 @@ async function loadManageProducts(){
     );
 
     const products =
-      await response.json();
+  await response.json();
 
-    const manageContainer =
-      document.getElementById(
-        "manage-products"
-      );
+const manageContainer =
+  document.getElementById(
+    "manage-products"
+  );
 
-    manageContainer.innerHTML = "";
+manageContainer.innerHTML = "";
 
-    products.forEach((product)=>{
+products.forEach((product)=>{
 
-      manageContainer.innerHTML += `
+  manageContainer.innerHTML += `
 
-        <div class="manage-product">
+<div class="manage-product">
 
-          <h4>${product.name}</h4>
+  <img
+    src="${product.mainImage}"
+    class="manage-product-image">
 
-          <div class="manage-buttons">
+  <h4>${product.name}</h4>
 
-            <button
-              onclick="deleteProduct('${product._id}')">
+  <p>₹${product.price}</p>
 
-              Delete
+  <p>Stock: ${product.stock}</p>
 
-            </button>
+  <div class="manage-buttons">
 
-          </div>
+    <button
+      onclick="editProduct('${product._id}')">
 
-        </div>
+      Edit
 
-      `;
+    </button>
 
-    });
+    <button
+      onclick="deleteProduct('${product._id}')">
 
+      Delete
+
+    </button>
+
+  </div>
+
+</div>
+
+`;
+
+});
   }
   catch(error){
 
@@ -978,29 +1042,54 @@ async function loadManageProducts(){
   }
 
 }
-async function deleteProduct(id){
+async function editProduct(id){
 
   try{
 
     const response = await fetch(
 
-      `https://e-commerce-backend-eubt.onrender.com/api/products/delete/${id}`,
-
-      {
-
-        method:"DELETE"
-
-      }
+      "https://e-commerce-backend-eubt.onrender.com/api/products"
 
     );
 
-    const data = await response.json();
+    const products =
+      await response.json();
 
-    alert(data.message);
+    const product =
+      products.find(
+        p => p._id === id
+      );
 
-    loadProducts();
+    editingProductId = id;
 
-    loadManageProducts();
+    document.getElementById(
+      "product-name"
+    ).value = product.name;
+
+    document.getElementById(
+      "product-price"
+    ).value = product.price;
+
+    document.getElementById(
+      "product-stock"
+    ).value = product.stock;
+
+    document.getElementById(
+      "product-category"
+    ).value = product.category;
+
+    document.getElementById(
+      "product-description"
+    ).value = product.description;
+
+    document.getElementById(
+      "product-main-image"
+    ).value = product.mainImage;
+
+    document.getElementById(
+      "admin-action-btn"
+    ).innerText =
+      "Update Product";
 
   }
   catch(error){
