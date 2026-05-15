@@ -260,6 +260,7 @@ function searchProducts(){
 // PAYMENT
 
 function openPayment(){
+  console.log("NEW PAYMENT FUNCTION");
 
   let cart = JSON.parse(
 
@@ -810,15 +811,7 @@ document.addEventListener(
   }
 
 );
-/* OPEN CHECKOUT */
 
-function openPayment(){
-
-  document.getElementById(
-    "checkout-modal"
-  ).style.display = "flex";
-
-}
 
 /* CLOSE CHECKOUT */
 
