@@ -79,6 +79,7 @@ router.get("/", async (req,res)=>{
 
 });
 /* DELETE PRODUCT */
+/* DELETE PRODUCT */
 
 router.delete(
 

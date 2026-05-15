@@ -1097,3 +1097,38 @@ async function editProduct(id){
   }
 
 }
+async function deleteProduct(id){
+
+  console.log(id);
+
+  try{
+
+    const response = await fetch(
+
+      `https://e-commerce-backend-eubt.onrender.com/api/products/delete/${id}`,
+
+      {
+
+        method:"DELETE"
+
+      }
+
+    );
+
+    const data =
+      await response.json();
+
+    alert(data.message);
+
+    loadProducts();
+
+    loadManageProducts();
+
+  }
+  catch(error){
+
+    console.log(error);
+
+  }
+
+}
