@@ -78,8 +78,33 @@
         category
       );
 
-      window.location.href =
-        "category.html";
+      function openCategory(category){
+
+  localStorage.setItem(
+    "selectedCategory",
+    category
+  );
+
+  if(
+
+    category === "Fashion" ||
+
+    category === "Shoes"
+
+  ){
+
+    window.location.href =
+      "subcategory.html";
+
+  }
+  else{
+
+    window.location.href =
+      "category.html";
+
+  }
+
+}
 
     }
 

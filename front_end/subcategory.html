@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <title>Sub Categories</title>
+
+  <link rel="stylesheet"
+    href="style.css">
+
+</head>
+
+<body>
+
+  <section class="subcategory-page">
+
+    <h1 id="subcategory-title">
+
+    </h1>
+
+    <div class="subcategory-container"
+      id="subcategory-container">
+
+    </div>
+
+  </section>
+
+<script>
+
+const category =
+  localStorage.getItem(
+    "selectedCategory"
+  );
+
+document.getElementById(
+  "subcategory-title"
+).innerText =
+  category;
+
+const container =
+  document.getElementById(
+    "subcategory-container"
+  );
+
+if(category === "Fashion"){
+
+  container.innerHTML = `
+
+    <div
+      class="subcategory-card"
+      onclick="openSubCategory(
+        'Men Fashion'
+      )">
+
+      <img
+        src="images/men-fashion.jpg">
+
+      <h2>Men Fashion</h2>
+
+    </div>
+
+    <div
+      class="subcategory-card"
+      onclick="openSubCategory(
+        'Women Fashion'
+      )">
+
+      <img
+        src="images/women-fashion.jpg">
+
+      <h2>Women Fashion</h2>
+
+    </div>
+
+  `;
+
+}
+
+if(category === "Shoes"){
+
+  container.innerHTML = `
+
+    <div
+      class="subcategory-card"
+      onclick="openSubCategory(
+        'Men Shoes'
+      )">
+
+      <img
+        src="images/men-shoes.jpg">
+
+      <h2>Men Shoes</h2>
+
+    </div>
+
+    <div
+      class="subcategory-card"
+      onclick="openSubCategory(
+        'Women Shoes'
+      )">
+
+      <img
+        src="images/women-shoes.jpg">
+
+      <h2>Women Shoes</h2>
+
+    </div>
+
+  `;
+
+}
+
+function openSubCategory(sub){
+
+  localStorage.setItem(
+    "selectedCategory",
+    sub
+  );
+
+  window.location.href =
+    "category.html";
+
+}
+
+</script>
+
+</body>
+
+</html>
