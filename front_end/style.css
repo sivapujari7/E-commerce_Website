@@ -217,21 +217,38 @@ footer{
 
 /* CART SIDEBAR */
 
+/* CART SIDEBAR */
+
 .cart-sidebar{
+
   position:fixed;
-  right:-400px;
+
   top:0;
+
+  right:-400px;
+
   width:350px;
+
   height:100vh;
+
   background:#111827;
+
   padding:20px;
+
   overflow-y:auto;
+
   box-shadow:-5px 0 10px rgba(0,0,0,0.5);
+
   transition:0.4s;
+
+  z-index:999999;
+
 }
 
-.cart-sidebar h2{
-  margin-bottom:20px;
+.cart-sidebar.active{
+
+  right:0;
+
 }
 
 .cart-item{
@@ -2057,5 +2074,36 @@ footer{
     grid-template-columns:1fr;
 
   }
+
+}
+/* FLOATING CART */
+
+.floating-cart{
+
+  position:fixed;
+
+  right:20px;
+
+  bottom:20px;
+
+  z-index:99999;
+
+}
+
+.floating-cart button{
+
+  background:#22d3ee;
+
+  border:none;
+
+  padding:15px 20px;
+
+  border-radius:50px;
+
+  font-size:18px;
+
+  cursor:pointer;
+
+  box-shadow:0 0 20px rgba(0,0,0,0.4);
 
 }

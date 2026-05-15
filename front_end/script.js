@@ -908,3 +908,29 @@ function placeOrder(method){
   location.reload();
 
 }
+/* AUTO OPEN CART */
+
+window.addEventListener(
+
+  "load",
+
+  ()=>{
+
+    const openCart =
+      localStorage.getItem(
+        "openCart"
+      );
+
+    if(openCart === "true"){
+
+      toggleCart();
+
+      localStorage.removeItem(
+        "openCart"
+      );
+
+    }
+
+  }
+
+);
