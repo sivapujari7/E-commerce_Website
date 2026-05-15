@@ -4,9 +4,13 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 // ADD TO CART
 
-function addToCart(name, price){
+function addToCart(product){
 
-  let existing = cart.find(item => item.name === name);
+  let existing = cart.find(
+
+    item => item.name === product.name
+
+  );
 
   if(existing){
 
@@ -16,9 +20,15 @@ function addToCart(name, price){
   else{
 
     cart.push({
-      name:name,
-      price:price,
+
+      name:product.name,
+
+      price:product.price,
+
+      mainImage:product.mainImage,
+
       quantity:1
+
     });
 
   }
@@ -27,7 +37,9 @@ function addToCart(name, price){
 
   updateCart();
 
-  showToast("Product Added To Cart");
+  showToast(
+    "Product Added To Cart"
+  );
 
 }
 // BUY PRODUCT WITH STOCK
