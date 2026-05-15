@@ -14,6 +14,15 @@
 
 </head>
 <body>
+  <div class="floating-cart">
+
+  <button onclick="goToHomeCart()">
+
+    🛒 Cart
+
+  </button>
+
+</div>
   <div class="product-images">
   <div
     id="image-slider"
@@ -47,5 +56,20 @@
 
   <script src="product.js"></script>
 
+<script>
+
+function goToHomeCart(){
+
+  localStorage.setItem(
+    "openCart",
+    "true"
+  );
+
+  window.location.href =
+    "index.html";
+
+}
+
+</script>
 </body>
 </html><div class="product-images">
