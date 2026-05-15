@@ -502,7 +502,7 @@ function openAdmin(){
 
   document.getElementById("admin-popup")
     .style.display = "flex";
-
+loadManageProducts();
 }
 
 function closeAdmin(){
@@ -923,3 +923,90 @@ window.addEventListener(
   }
 
 );
+/* LOAD MANAGE PRODUCTS */
+
+async function loadManageProducts(){
+
+  try{
+
+    const response = await fetch(
+
+      "https://e-commerce-backend-eubt.onrender.com/api/products"
+
+    );
+
+    const products =
+      await response.json();
+
+    const manageContainer =
+      document.getElementById(
+        "manage-products"
+      );
+
+    manageContainer.innerHTML = "";
+
+    products.forEach((product)=>{
+
+      manageContainer.innerHTML += `
+
+        <div class="manage-product">
+
+          <h4>${product.name}</h4>
+
+          <div class="manage-buttons">
+
+            <button
+              onclick="deleteProduct('${product._id}')">
+
+              Delete
+
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+    });
+
+  }
+  catch(error){
+
+    console.log(error);
+
+  }
+
+}
+async function deleteProduct(id){
+
+  try{
+
+    const response = await fetch(
+
+      `https://e-commerce-backend-eubt.onrender.com/api/products/delete/${id}`,
+
+      {
+
+        method:"DELETE"
+
+      }
+
+    );
+
+    const data = await response.json();
+
+    alert(data.message);
+
+    loadProducts();
+
+    loadManageProducts();
+
+  }
+  catch(error){
+
+    console.log(error);
+
+  }
+
+}

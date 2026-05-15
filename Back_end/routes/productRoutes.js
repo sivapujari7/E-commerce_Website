@@ -78,5 +78,41 @@ router.get("/", async (req,res)=>{
   }
 
 });
+/* DELETE PRODUCT */
 
+router.delete(
+
+  "/delete/:id",
+
+  async(req,res)=>{
+
+    try{
+
+      await Product.findByIdAndDelete(
+
+        req.params.id
+
+      );
+
+      res.status(200).json({
+
+        message:
+          "Product Deleted"
+
+      });
+
+    }
+    catch(error){
+
+      res.status(500).json({
+
+        message:error.message
+
+      });
+
+    }
+
+  }
+
+);
 module.exports = router;
