@@ -57,3 +57,54 @@ function changeImage(image){
   mainImage.src = image;
 
 }
+document.getElementById(
+  "add-cart-btn"
+).addEventListener(
+
+  "click",
+
+  ()=>{
+
+    let cart = JSON.parse(
+      localStorage.getItem("cart")
+    ) || [];
+
+    let existing =
+      cart.find(item =>
+        item.name === product.name
+      );
+
+    if(existing){
+
+      existing.quantity++;
+
+    }
+    else{
+
+      cart.push({
+
+        name:product.name,
+
+        price:product.price,
+
+        quantity:1,
+
+        image:product.mainImage
+
+      });
+
+    }
+
+    localStorage.setItem(
+
+      "cart",
+
+      JSON.stringify(cart)
+
+    );
+
+    alert("Product Added To Cart 😄🔥");
+
+  }
+
+);

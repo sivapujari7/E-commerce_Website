@@ -370,6 +370,83 @@ placeholder="Enter Password"
     </p>
 
   </footer>
+<!-- CHECKOUT POPUP -->
+      placeholder="Phone Number">
 
+    <textarea
+      id="customer-address"
+      placeholder="Full Address"
+      class="address-box">
+    </textarea>
+
+    <input
+      type="text"
+      id="customer-pincode"
+      placeholder="Pin Code">
+
+    <button onclick="openPaymentMethods()">
+      Proceed To Payment
+    </button>
+
+  </div>
+
+</div>
+
+<!-- PAYMENT POPUP -->
+
+<div class="popup" id="payment-method-popup">
+
+  <div class="popup-content">
+
+    <span
+      class="close-btn"
+      onclick="closePaymentMethods()">
+
+      ✖
+
+    </span>
+
+    <h2>Select Payment Method</h2>
+
+    <div class="payment-grid">
+
+      <div class="payment-card"
+        onclick="placeOrder('PhonePe')">
+
+        <img
+          src="images/phonepe.png"
+          alt="PhonePe">
+
+        <p>PhonePe</p>
+
+      </div>
+
+      <div class="payment-card"
+        onclick="placeOrder('Paytm')">
+
+        <img
+          src="images/paytm.png"
+          alt="Paytm">
+
+        <p>Paytm</p>
+
+      </div>
+
+      <div class="payment-card"
+        onclick="placeOrder('Google Pay')">
+
+        <img
+          src="images/gpay.png"
+          alt="Google Pay">
+
+        <p>Google Pay</p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 </body>
 </html>

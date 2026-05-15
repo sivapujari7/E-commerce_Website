@@ -261,10 +261,11 @@ function searchProducts(){
 
 function openPayment(){
 
-  document.getElementById("payment-popup").style.display = "flex";
+  document.getElementById(
+    "checkout-popup"
+  ).style.display = "flex";
 
 }
-
 function closePayment(){
 
   document.getElementById("payment-popup").style.display = "none";
@@ -813,3 +814,73 @@ document.addEventListener(
   }
 
 );
+function closeCheckout(){
+
+  document.getElementById(
+    "checkout-popup"
+  ).style.display = "none";
+
+}
+
+function openPaymentMethods(){
+
+  const name =
+    document.getElementById(
+      "customer-name"
+    ).value;
+
+  const phone =
+    document.getElementById(
+      "customer-phone"
+    ).value;
+
+  const address =
+    document.getElementById(
+      "customer-address"
+    ).value;
+
+  const pincode =
+    document.getElementById(
+      "customer-pincode"
+    ).value;
+
+  if(
+    !name ||
+    !phone ||
+    !address ||
+    !pincode
+  ){
+
+    alert("Please Fill All Details");
+
+    return;
+
+  }
+
+  closeCheckout();
+
+  document.getElementById(
+    "payment-method-popup"
+  ).style.display = "flex";
+
+}
+
+function closePaymentMethods(){
+
+  document.getElementById(
+    "payment-method-popup"
+  ).style.display = "none";
+
+}
+
+function placeOrder(method){
+
+  alert(
+    `Order Placed Successfully Using ${method} 😄🔥`
+  );
+
+  localStorage.removeItem("cart");
+
+  location.reload();
+
+}
