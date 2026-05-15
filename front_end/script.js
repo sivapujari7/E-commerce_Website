@@ -261,31 +261,27 @@ function searchProducts(){
 
 function openPayment(){
 
+  let cart = JSON.parse(
+
+    localStorage.getItem("cart")
+
+  ) || [];
+
+  if(cart.length === 0){
+
+    alert("No Product Added ☹️");
+
+    return;
+
+  }
+
   document.getElementById(
-    "checkout-popup"
+
+    "checkout-modal"
+
   ).style.display = "flex";
 
 }
-function closePayment(){
-
-  document.getElementById("payment-popup").style.display = "none";
-
-}
-
-function payNow(method){
-
-  alert("Payment Successful Using " + method);
-
-  cart = [];
-
-  saveCart();
-
-  updateCart();
-
-  closePayment();
-
-}
-
 // TOAST
 
 function showToast(message){
