@@ -814,34 +814,48 @@ document.addEventListener(
   }
 
 );
-function closeCheckout(){
+/* OPEN CHECKOUT */
+
+function openPayment(){
 
   document.getElementById(
-    "checkout-popup"
+    "checkout-modal"
+  ).style.display = "flex";
+
+}
+
+/* CLOSE CHECKOUT */
+
+function closeCheckoutModal(){
+
+  document.getElementById(
+    "checkout-modal"
   ).style.display = "none";
 
 }
 
-function openPaymentMethods(){
+/* OPEN PAYMENT */
+
+function openPaymentStep(){
 
   const name =
     document.getElementById(
-      "customer-name"
+      "checkout-name"
     ).value;
 
   const phone =
     document.getElementById(
-      "customer-phone"
+      "checkout-phone"
     ).value;
 
   const address =
     document.getElementById(
-      "customer-address"
+      "checkout-address"
     ).value;
 
   const pincode =
     document.getElementById(
-      "customer-pincode"
+      "checkout-pincode"
     ).value;
 
   if(
@@ -851,35 +865,45 @@ function openPaymentMethods(){
     !pincode
   ){
 
-    alert("Please Fill All Details");
+    alert(
+      "Please Fill All Details"
+    );
 
     return;
 
   }
 
-  closeCheckout();
+  closeCheckoutModal();
 
   document.getElementById(
-    "payment-method-popup"
+    "payment-modal"
   ).style.display = "flex";
 
 }
 
-function closePaymentMethods(){
+/* CLOSE PAYMENT */
+
+function closePaymentModal(){
 
   document.getElementById(
-    "payment-method-popup"
+    "payment-modal"
   ).style.display = "none";
 
 }
 
+/* PLACE ORDER */
+
 function placeOrder(method){
 
   alert(
+
     `Order Placed Successfully Using ${method} 😄🔥`
+
   );
 
-  localStorage.removeItem("cart");
+  localStorage.removeItem(
+    "cart"
+  );
 
   location.reload();
 

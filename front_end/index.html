@@ -386,58 +386,102 @@ placeholder="Enter Password"
 
     <button onclick="openPaymentMethods()">
       Proceed To Payment
+      <!-- CHECKOUT MODAL -->
+
+<div
+  class="checkout-modal"
+  id="checkout-modal">
+
+  <div class="checkout-box">
+
+    <span
+      class="close-checkout"
+      onclick="closeCheckoutModal()">
+
+      ✖
+
+    </span>
+
+    <h2>Delivery Details</h2>
+
+    <input
+      type="text"
+      id="checkout-name"
+      placeholder="Full Name">
+
+    <input
+      type="text"
+      id="checkout-phone"
+      placeholder="Phone Number">
+
+    <textarea
+      id="checkout-address"
+      placeholder="Full Address">
+    </textarea>
+
+    <input
+      type="text"
+      id="checkout-pincode"
+      placeholder="Pincode">
+
+    <button onclick="openPaymentStep()">
+
+      Continue
+
     </button>
 
   </div>
 
 </div>
 
-<!-- PAYMENT POPUP -->
+<!-- PAYMENT MODAL -->
 
-<div class="popup" id="payment-method-popup">
+<div
+  class="checkout-modal"
+  id="payment-modal">
 
-  <div class="popup-content">
+  <div class="checkout-box">
 
     <span
-      class="close-btn"
-      onclick="closePaymentMethods()">
+      class="close-checkout"
+      onclick="closePaymentModal()">
 
       ✖
 
     </span>
 
-    <h2>Select Payment Method</h2>
+    <h2>Select Payment</h2>
 
-    <div class="payment-grid">
+    <div class="payment-methods">
 
-      <div class="payment-card"
+      <div
+        class="payment-option"
         onclick="placeOrder('PhonePe')">
 
         <img
-          src="images/phonepe.png"
-          alt="PhonePe">
+          src="images/phonepe.png">
 
         <p>PhonePe</p>
 
       </div>
 
-      <div class="payment-card"
+      <div
+        class="payment-option"
         onclick="placeOrder('Paytm')">
 
         <img
-          src="images/paytm.png"
-          alt="Paytm">
+          src="images/paytm.png">
 
         <p>Paytm</p>
 
       </div>
 
-      <div class="payment-card"
+      <div
+        class="payment-option"
         onclick="placeOrder('Google Pay')">
 
         <img
-          src="images/gpay.png"
-          alt="Google Pay">
+          src="images/gpay.png">
 
         <p>Google Pay</p>
 
@@ -448,5 +492,11 @@ placeholder="Enter Password"
   </div>
 
 </div>
-</body>
-</html>
+    </button>
+
+  </div>
+
+</div>
+
+<!-- PAYMENT POPUP -->
+
