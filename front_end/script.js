@@ -250,7 +250,9 @@ function searchProducts(){
     .value
     .toLowerCase();
 
-  let products = document.querySelectorAll(".product-card");
+  let products = document.querySelectorAll(
+  "#product-container .product-card"
+);
 
   products.forEach((product)=>{
 
@@ -632,7 +634,7 @@ async function loadProducts(){
         </div>
 
       `;
-if(product.isTrending){
+if(product.isTrending === true){
 
   trendingContainer.innerHTML += `
 
@@ -813,7 +815,7 @@ document.getElementById(
 
     loadProducts();
   
-
+loadManageProducts();
   }
   catch(error){
 
@@ -1132,7 +1134,6 @@ async function deleteProduct(id){
 
     alert(data.message);
 
-    loadProducts();
 
     loadManageProducts();
 
