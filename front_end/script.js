@@ -675,7 +675,7 @@ async function loadProducts(){
   }
 
 }
-function buyProductById(id, button){git
+function buyProductById(id, button){
 
   const product = allProducts.find(
     p => p._id === id
@@ -721,7 +721,17 @@ function openProductPageById(id){
     "product.html";
 
 }
-loadProducts();
+window.addEventListener(
+
+  "DOMContentLoaded",
+
+  ()=>{
+
+    loadProducts();
+
+  }
+
+);
 async function addNewProduct(){
 
   const name =
