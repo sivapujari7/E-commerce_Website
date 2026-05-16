@@ -609,78 +609,102 @@ async function loadProducts(){
         "product-container"
       );
 
-      const trendingContainer =
-  document.getElementById(
-    "trending-container"
-  );
+    const trendingContainer =
+      document.getElementById(
+        "trending-container"
+      );
 
     container.innerHTML = "";
+
     trendingContainer.innerHTML = "";
+
+    let productsHTML = "";
+
+    let trendingHTML = "";
 
     products.forEach((product)=>{
 
-      container.innerHTML += `
+      productsHTML += `
 
        <div class="product-card"
-  data-name="${product.name}">
+         data-name="${product.name}">
 
-          <img src="${product.mainImage}" 
+          <img
+            src="${product.mainImage}" 
             alt="${product.name}">
 
           <h3>${product.name}</h3>
 
-         <p>${product.category}</p>
+          <p>${product.category}</p>
 
           <div class="stock">
+
             Stock:
+
             <span class="stock-count">
+
               ${product.stock}
+
             </span>
+
           </div>
 
           <button onclick='buyProduct(
-  this,
-  ${JSON.stringify(product)}
-)'>
+            this,
+            ${JSON.stringify(product)}
+          )'>
 
-  Add To Cart
+            Add To Cart
 
-</button>
-<button onclick='openProductPage(
-  ${JSON.stringify(product)}
-)'>
-  View Details
-</button>
+          </button>
+
+          <button onclick='openProductPage(
+            ${JSON.stringify(product)}
+          )'>
+
+            View Details
+
+          </button>
+
         </div>
 
       `;
-if(product.isTrending === true){
 
-  trendingContainer.innerHTML += `
+      if(product.isTrending === true){
 
-    <div class="product-card"
-  data-name="${product.name}">
+        trendingHTML += `
 
-      <img
-        src="${product.mainImage}"
-        alt="${product.name}">
+          <div class="product-card"
+            data-name="${product.name}">
 
-      <h3>${product.name}</h3>
+            <img
+              src="${product.mainImage}"
+              alt="${product.name}">
 
-      <p>₹${product.price}</p>
+            <h3>${product.name}</h3>
 
-      <button onclick='openProductPage(
-        ${JSON.stringify(product)}
-      )'>
-        View Details
-      </button>
+            <p>₹${product.price}</p>
 
-    </div>
+            <button onclick='openProductPage(
+              ${JSON.stringify(product)}
+            )'>
 
-  `;
+              View Details
 
-}
+            </button>
+
+          </div>
+
+        `;
+
+      }
+
     });
+
+    container.innerHTML = productsHTML;
+
+    trendingContainer.innerHTML =
+      trendingHTML;
 
   }
   catch(error){
