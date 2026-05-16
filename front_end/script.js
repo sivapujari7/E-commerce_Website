@@ -675,6 +675,52 @@ async function loadProducts(){
   }
 
 }
+function buyProductById(id, button){git
+
+  const product = allProducts.find(
+    p => p._id === id
+  );
+
+  if(!product){
+
+    console.log("Product Not Found");
+
+    return;
+
+  }
+
+  buyProduct(button, product);
+
+}
+
+function openProductPageById(id){
+
+  const product = allProducts.find(
+    p => p._id === id
+  );
+
+  if(!product){
+
+    console.log("Product Not Found");
+
+    return;
+
+  }
+
+  localStorage.setItem(
+    "selectedProduct",
+    JSON.stringify(product)
+  );
+
+  localStorage.setItem(
+    "openCart",
+    "false"
+  );
+
+  window.location.href =
+    "product.html";
+
+}
 loadProducts();
 async function addNewProduct(){
 
