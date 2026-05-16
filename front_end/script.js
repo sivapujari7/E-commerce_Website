@@ -220,14 +220,20 @@ function searchProducts(){
     .toLowerCase();
 
   let products = document.querySelectorAll(
-  "#product-container .product-card"
-);
+    ".product-card"
+  );
 
   products.forEach((product)=>{
 
-    let name = product.dataset.name.toLowerCase();
+    let title =
+      product.querySelector("h3");
 
-    if(name.includes(input)){
+    if(!title) return;
+
+    let productName =
+      title.innerText.toLowerCase();
+
+    if(productName.includes(input)){
 
       product.style.display = "block";
 
