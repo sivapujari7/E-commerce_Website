@@ -1325,3 +1325,117 @@ async function bulkUploadProducts(){
   }
 
 }
+function openForgotPassword(){
+
+  document.getElementById(
+    "forgot-popup"
+  ).style.display = "flex";
+
+}
+
+function closeForgotPassword(){
+
+  document.getElementById(
+    "forgot-popup"
+  ).style.display = "none";
+
+}
+async function sendOTP(){
+
+  const email =
+    document.getElementById(
+      "forgot-email"
+    ).value;
+
+  try{
+
+    const response = await fetch(
+
+      `${API_URL}/api/auth/forgot-password`,
+
+      {
+
+        method:"POST",
+
+        headers:{
+          "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+          email
+        })
+
+      }
+
+    );
+
+    const data =
+      await response.json();
+
+    alert(data.message);
+
+  }
+  catch(error){
+
+    console.log(error);
+
+  }
+
+}
+
+async function resetPassword(){
+
+  const email =
+    document.getElementById(
+      "forgot-email"
+    ).value;
+
+  const otp =
+    document.getElementById(
+      "forgot-otp"
+    ).value;
+
+  const newPassword =
+    document.getElementById(
+      "new-password"
+    ).value;
+
+  try{
+
+    const response = await fetch(
+
+      `${API_URL}/api/auth/reset-password`,
+
+      {
+
+        method:"POST",
+
+        headers:{
+          "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+          email,
+          otp,
+          newPassword
+
+        })
+
+      }
+
+    );
+
+    const data =
+      await response.json();
+
+    alert(data.message);
+
+  }
+  catch(error){
+
+    console.log(error);
+
+  }
+
+}

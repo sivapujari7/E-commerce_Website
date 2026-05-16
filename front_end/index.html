@@ -192,7 +192,13 @@
   id="login-password"
   placeholder="Enter Password"
 >
-   
+   <p
+  class="forgot-link"
+  onclick="openForgotPassword()">
+
+  Forgot Password?
+
+</p>
     <button onclick="loginUser()">
   Login
 </button>
@@ -202,6 +208,54 @@
         Register
       </span>
     </p>
+
+  </div>
+
+</div>
+<!-- FORGOT PASSWORD POPUP -->
+
+<div
+  class="popup"
+  id="forgot-popup">
+
+  <div class="popup-content">
+
+    <span
+      class="close-btn"
+      onclick="closeForgotPassword()">
+
+      ✖
+
+    </span>
+
+    <h2>Reset Password</h2>
+
+    <input
+      type="email"
+      id="forgot-email"
+      placeholder="Enter Email">
+
+    <button onclick="sendOTP()">
+
+      Send OTP
+
+    </button>
+
+    <input
+      type="text"
+      id="forgot-otp"
+      placeholder="Enter OTP">
+
+    <input
+      type="password"
+      id="new-password"
+      placeholder="New Password">
+
+    <button onclick="resetPassword()">
+
+      Reset Password
+
+    </button>
 
   </div>
 

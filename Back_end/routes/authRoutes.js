@@ -4,22 +4,36 @@ const bcrypt = require("bcryptjs");
 
 const jwt = require("jsonwebtoken");
 
+const nodemailer = require("nodemailer");
+
 const User = require("../models/User");
 
 const router = express.Router();
 
+const transporter = nodemailer.createTransport({
+
+  service:"gmail",
+
+  auth:{
+
+    user:process.env.EMAIL_USER,
+
+    pass:process.env.EMAIL_PASS
+
+  }
+
+});
 
 // REGISTER USER
 
-router.post("/register", async (req,res)=>{
+router.post("/register", async(req,res)=>{
 
   try{
 
-    const {name,email,password} = req.body;
+    const { name,email,password } = req.body;
 
-    // CHECK USER
-
-    const existingUser = await User.findOne({email});
+    const existingUser =
+      await User.findOne({ email });
 
     if(existingUser){
 
@@ -31,13 +45,11 @@ router.post("/register", async (req,res)=>{
 
     }
 
-    // ENCRYPT PASSWORD
+    const salt =
+      await bcrypt.genSalt(10);
 
-    const salt = await bcrypt.genSalt(10);
-
-    const hashedPassword = await bcrypt.hash(password,salt);
-
-    // CREATE USER
+    const hashedPassword =
+      await bcrypt.hash(password,salt);
 
     const newUser = new User({
 
@@ -68,18 +80,16 @@ router.post("/register", async (req,res)=>{
 
 });
 
-
 // LOGIN USER
 
-router.post("/login", async (req,res)=>{
+router.post("/login", async(req,res)=>{
 
   try{
 
-    const {email,password} = req.body;
+    const { email,password } = req.body;
 
-    // CHECK USER
-
-    const user = await User.findOne({email});
+    const user =
+      await User.findOne({ email });
 
     if(!user){
 
@@ -91,14 +101,11 @@ router.post("/login", async (req,res)=>{
 
     }
 
-    // CHECK PASSWORD
-
-    const isMatch = await bcrypt.compare(
-
-      password,
-      user.password
-
-    );
+    const isMatch =
+      await bcrypt.compare(
+        password,
+        user.password
+      );
 
     if(!isMatch){
 
@@ -110,22 +117,16 @@ router.post("/login", async (req,res)=>{
 
     }
 
-    // CREATE TOKEN
-
     const token = jwt.sign(
 
       {
-
         id:user._id
-
       },
 
       "secretkey",
 
       {
-
         expiresIn:"7d"
-
       }
 
     );
@@ -144,6 +145,165 @@ router.post("/login", async (req,res)=>{
     res.status(500).json({
 
       message:error.message
+
+    });
+
+  }
+
+});
+
+// FORGOT PASSWORD
+
+router.post("/forgot-password", async(req,res)=>{
+
+  const { email } = req.body;
+
+  try{
+
+    const user =
+      await User.findOne({ email });
+
+    if(!user){
+
+      return res.json({
+
+        message:"User Not Found"
+
+      });
+
+    }
+
+    const otp = Math.floor(
+
+      100000 + Math.random() * 900000
+
+    ).toString();
+
+    user.resetOTP = otp;
+
+    user.otpExpire =
+      Date.now() + 300000;
+
+    await user.save();
+
+    await transporter.sendMail({
+
+      from:process.env.EMAIL_USER,
+
+      to:email,
+
+      subject:"Password Reset OTP",
+
+      html:`
+
+        <h2>Your OTP: ${otp}</h2>
+
+        <p>
+          OTP valid for 5 minutes.
+        </p>
+
+      `
+
+    });
+
+    res.json({
+
+      message:"OTP Sent Successfully"
+
+    });
+
+  }
+  catch(error){
+
+    console.log(error);
+
+    res.status(500).json({
+
+      message:"Server Error"
+
+    });
+
+  }
+
+});
+
+// RESET PASSWORD
+
+router.post("/reset-password", async(req,res)=>{
+
+  const {
+
+    email,
+    otp,
+    newPassword
+
+  } = req.body;
+
+  try{
+
+    const user =
+      await User.findOne({ email });
+
+    if(!user){
+
+      return res.json({
+
+        message:"User Not Found"
+
+      });
+
+    }
+
+    if(user.resetOTP !== otp){
+
+      return res.json({
+
+        message:"Invalid OTP"
+
+      });
+
+    }
+
+    if(user.otpExpire < Date.now()){
+
+      return res.json({
+
+        message:"OTP Expired"
+
+      });
+
+    }
+
+    const hashedPassword =
+      await bcrypt.hash(
+        newPassword,
+        10
+      );
+
+    user.password =
+      hashedPassword;
+
+    user.resetOTP = null;
+
+    user.otpExpire = null;
+
+    await user.save();
+
+    res.json({
+
+      message:
+        "Password Reset Successful"
+
+    });
+
+  }
+  catch(error){
+
+    console.log(error);
+
+    res.status(500).json({
+
+      message:"Server Error"
 
     });
 
