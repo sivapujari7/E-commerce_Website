@@ -827,6 +827,9 @@ else{
     const data = await response.json();
 
     showToast(data.message);
+    await loadProducts();
+
+await loadManageProducts();
     editingProductId = null;
 
 document.getElementById(
@@ -835,9 +838,7 @@ document.getElementById(
 
     closeAdmin();
 
-    loadProducts();
-  
-loadManageProducts();
+   
   }
   catch(error){
 
