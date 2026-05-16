@@ -12,11 +12,7 @@ const router = express.Router();
 
 const transporter = nodemailer.createTransport({
 
-  host:"smtp.gmail.com",
-
-  port:465,
-
-  secure:true,
+  service:"gmail",
 
   auth:{
 
@@ -24,9 +20,7 @@ const transporter = nodemailer.createTransport({
 
     pass:process.env.EMAIL_PASS
 
-  },
-
-  family:4
+  }
 
 });
 
