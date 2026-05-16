@@ -68,9 +68,7 @@ function buyProduct(button,product){
 
     button.innerText = "Out Of Stock";
 
-    button.disabled = true;
-
-    button.classList.add("out-stock");
+   
 
   }
 
@@ -861,6 +859,10 @@ function openProductPage(product){
     "product.html";
 
 }
+localStorage.setItem(
+  "openCart",
+  "false"
+);
 function goToCategories(){
 
   window.location.href =
@@ -1130,7 +1132,7 @@ async function editProduct(id){
       "admin-action-btn"
     ).innerText =
       "Update Product";
-      
+
       document.querySelector(
   ".admin-content"
 ).scrollTo({
