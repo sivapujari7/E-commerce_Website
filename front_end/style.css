@@ -2697,3 +2697,20 @@ footer{
   align-items:start;
 
 }
+#trending-container .product-card{
+
+  min-height:420px;
+
+}
+
+#trending-container .product-card img{
+
+  height:220px;
+
+}
+
+#trending-container button{
+
+  margin-top:10px;
+
+}
