@@ -1113,6 +1113,7 @@ async function editProduct(id){
     document.getElementById(
       "product-category"
     ).value = product.category;
+
     document.getElementById(
   "product-trending"
 ).checked = product.isTrending;
@@ -1129,9 +1130,29 @@ async function editProduct(id){
       "admin-action-btn"
     ).innerText =
       "Update Product";
+      
+      document.querySelector(
+  ".admin-content"
+).scrollTo({
+
+  top:0,
+
+  behavior:"smooth"
+
+});
 
   }
   catch(error){
+
+    document.querySelector(
+  ".admin-content"
+).scrollTo({
+
+  top:0,
+
+  behavior:"smooth"
+
+});
 
     console.log(error);
 

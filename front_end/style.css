@@ -2420,3 +2420,230 @@ footer{
   color:white;
 
 }
+/* =========================
+   PROFESSIONAL ADMIN UI
+========================= */
+
+.admin-content{
+
+  width:95%;
+
+  height:95vh;
+
+  background:#0f172a;
+
+  border-radius:25px;
+
+  padding:30px;
+
+  overflow-y:auto;
+
+  position:relative;
+
+  box-shadow:
+    0 0 40px rgba(0,0,0,0.5);
+
+}
+
+/* TITLE */
+
+.admin-content h2{
+
+  font-size:32px;
+
+  margin-bottom:25px;
+
+  text-align:center;
+
+  color:#22d3ee;
+
+}
+
+/* FORM SECTION */
+
+.admin-form{
+
+  background:#111827;
+
+  padding:25px;
+
+  border-radius:20px;
+
+  margin-bottom:40px;
+
+  position:sticky;
+
+  top:0;
+
+  z-index:50;
+
+}
+
+/* INPUTS */
+
+.admin-content input,
+.admin-content textarea,
+.admin-content select{
+
+  width:100%;
+
+  padding:15px;
+
+  margin-bottom:15px;
+
+  border:none;
+
+  border-radius:12px;
+
+  background:#1e293b;
+
+  color:white;
+
+  font-size:16px;
+
+}
+
+/* TEXTAREA */
+
+.admin-content textarea{
+
+  min-height:120px;
+
+  resize:none;
+
+}
+
+/* BUTTON */
+
+.admin-content button{
+
+  background:#22d3ee;
+
+  color:black;
+
+  border:none;
+
+  padding:15px;
+
+  border-radius:12px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:0.3s;
+
+}
+
+.admin-content button:hover{
+
+  transform:scale(1.03);
+
+}
+
+/* PRODUCT GRID */
+
+#manage-products{
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(260px,1fr));
+
+  gap:25px;
+
+}
+
+/* PRODUCT CARD */
+
+.manage-product{
+
+  background:#111827;
+
+  border-radius:20px;
+
+  overflow:hidden;
+
+  padding:15px;
+
+  transition:0.3s;
+
+}
+
+.manage-product:hover{
+
+  transform:translateY(-5px);
+
+}
+
+/* IMAGE */
+
+.manage-product-image{
+
+  width:100%;
+
+  height:220px;
+
+  object-fit:cover;
+
+  border-radius:15px;
+
+}
+
+/* BUTTON AREA */
+
+.manage-buttons{
+
+  display:flex;
+
+  gap:10px;
+
+  margin-top:15px;
+
+}
+
+.manage-buttons button{
+
+  flex:1;
+
+}
+
+/* FILTERS */
+
+.admin-filters{
+
+  display:flex;
+
+  gap:10px;
+
+  flex-wrap:wrap;
+
+  margin-bottom:25px;
+
+}
+
+.admin-filters button{
+
+  padding:10px 20px;
+
+  border-radius:30px;
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .admin-content{
+
+    width:100%;
+
+    height:100vh;
+
+    border-radius:0;
+
+    padding:20px;
+
+  }
+
+}
