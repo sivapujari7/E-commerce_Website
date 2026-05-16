@@ -113,10 +113,16 @@ body{
 }
 
 .product-container{
-  display:flex;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
   gap:40px;
-  justify-content:center;
-  flex-wrap:wrap;
+
+  align-items:start;
+
 }
 
 .product-card{
@@ -126,7 +132,9 @@ body{
   overflow:hidden;
   transition:0.4s;
   position:relative;
+  min-height:520px;
 }
+
 
 .product-card:hover{
   transform:translateY(-10px) scale(1.02);
