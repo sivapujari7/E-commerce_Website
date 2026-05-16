@@ -1113,6 +1113,9 @@ async function editProduct(id){
     document.getElementById(
       "product-category"
     ).value = product.category;
+    document.getElementById(
+  "product-trending"
+).checked = product.isTrending;
 
     document.getElementById(
       "product-description"
