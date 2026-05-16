@@ -44,38 +44,9 @@ function addToCart(product){
 }
 // BUY PRODUCT WITH STOCK
 function buyProduct(button,product){
-
-  let stockElement = button.parentElement
-    .querySelector(".stock-count");
-
-  let stock = parseInt(
-    stockElement.innerText
-  );
-
-  if(stock <= 0){
-
-    showToast("Out Of Stock");
-
-    return;
-
+   addToCart(product);
   }
-
-  stock--;
-
-  stockElement.innerText = stock;
-
-  if(stock === 0){
-
-    button.innerText = "Out Of Stock";
-
-   
-
-  }
-
-  addToCart(product);
-
-}
-
+  
 // UPDATE CART
 
 function updateCart(){
@@ -614,11 +585,7 @@ async function loadProducts(){
         "trending-container"
       );
 
-    container.innerHTML = "";
-
-    trendingContainer.innerHTML = "";
-
-    let productsHTML = "";
+  let productsHTML = "";
 
     let trendingHTML = "";
 
@@ -626,11 +593,11 @@ async function loadProducts(){
 
       productsHTML += `
 
-       <div class="product-card"
-         data-name="${product.name}">
+        <div class="product-card"
+          data-name="${product.name}">
 
           <img
-            src="${product.mainImage}" 
+            src="${product.mainImage}"
             alt="${product.name}">
 
           <h3>${product.name}</h3>
@@ -649,18 +616,9 @@ async function loadProducts(){
 
           </div>
 
-          <button onclick='buyProduct(
-            this,
-            ${JSON.stringify(product)}
-          )'>
+          <button onclick='buyProduct(this, ${JSON.stringify(product).replace(/'/g,"&apos;")})'>
 
-            Add To Cart
-
-          </button>
-
-          <button onclick='openProductPage(
-            ${JSON.stringify(product)}
-          )'>
+          <button onclick='openProductPage(${JSON.stringify(product).replace(/'/g,"&apos;")})'>
 
             View Details
 
@@ -670,7 +628,7 @@ async function loadProducts(){
 
       `;
 
-      if(product.isTrending === true){
+      if(product.isTrending){
 
         trendingHTML += `
 
@@ -685,7 +643,7 @@ async function loadProducts(){
 
             <p>₹${product.price}</p>
 
-            <button onclick='openProductPage(
+            <button onclick='openProductPage(${JSON.stringify(product).replace(/'/g,"&apos;")})'>
               ${JSON.stringify(product)}
             )'>
 
@@ -876,17 +834,17 @@ function openProductPage(product){
     "selectedProduct",
 
     JSON.stringify(product)
-
+  );
+  localStorage.setItem(
+    "openCart",
+    "false"
   );
 
   window.location.href =
     "product.html";
 
 }
-localStorage.setItem(
-  "openCart",
-  "false"
-);
+
 function goToCategories(){
 
   window.location.href =
