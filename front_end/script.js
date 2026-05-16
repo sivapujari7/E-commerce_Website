@@ -1,7 +1,7 @@
 let editingProductId = null;
 const API_URL = "https://e-commerce-backend-eubt.onrender.com";
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
+let allProducts = [];
 // ADD TO CART
 
 function addToCart(product){
@@ -46,7 +46,7 @@ function addToCart(product){
 function buyProduct(button,product){
    addToCart(product);
   }
-  
+
 // UPDATE CART
 
 function updateCart(){
@@ -574,6 +574,7 @@ async function loadProducts(){
     );
 
     const products = await response.json();
+    allProducts = products;
 
     const container =
       document.getElementById(
@@ -616,13 +617,17 @@ async function loadProducts(){
 
           </div>
 
-          <button onclick='buyProduct(this, ${JSON.stringify(product).replace(/'/g,"&apos;")})'>
+          <button onclick="buyProductById('${product._id}', this)">
 
-          <button onclick='openProductPage(${JSON.stringify(product).replace(/'/g,"&apos;")})'>
+  Add To Cart
 
-            View Details
+</button>
 
-          </button>
+<button onclick="openProductPageById('${product._id}')">
+
+  View Details
+
+</button>
 
         </div>
 
@@ -643,13 +648,11 @@ async function loadProducts(){
 
             <p>₹${product.price}</p>
 
-            <button onclick='openProductPage(${JSON.stringify(product).replace(/'/g,"&apos;")})'>
-              ${JSON.stringify(product)}
-            )'>
+            <button onclick="openProductPageById('${product._id}')">
 
-              View Details
+  View Details
 
-            </button>
+</button>
 
           </div>
 
