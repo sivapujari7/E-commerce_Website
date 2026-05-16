@@ -530,7 +530,8 @@ function closeAdmin(){
 checkLogin();
 function checkAdminAccess(){
 
-  const token = localStorage.getItem("token");
+  const token =
+    localStorage.getItem("token");
 
   const userEmail =
     localStorage.getItem("userEmail");
@@ -545,9 +546,25 @@ function checkAdminAccess(){
 
   }
 
-  if(userEmail !== "poojari.shiva1234@gmail.com"){
+  if(
+    userEmail !==
+    "poojari.shiva1234@gmail.com"
+  ){
 
     showToast("Access Denied");
+
+    return;
+
+  }
+
+  const adminLoggedIn =
+    localStorage.getItem(
+      "adminLoggedIn"
+    );
+
+  if(adminLoggedIn === "true"){
+
+    openAdmin();
 
     return;
 
@@ -559,18 +576,23 @@ function checkAdminAccess(){
 
   if(adminPassword === "sivaadmin"){
 
+    localStorage.setItem(
+      "adminLoggedIn",
+      "true"
+    );
+
     openAdmin();
 
   }
   else{
 
-    showToast("Wrong Admin Password");
+    showToast(
+      "Wrong Admin Password"
+    );
 
   }
 
 }
-
- 
 
 async function loadProducts(){
 
@@ -1010,8 +1032,9 @@ manageContainer.innerHTML = "";
 products.forEach((product)=>{
 
   manageContainer.innerHTML += `
-
-<div class="manage-product">
+<div
+  class="manage-product"
+  data-category="${product.category}">
 
   <img
     src="${product.mainImage}"
@@ -1141,6 +1164,95 @@ async function deleteProduct(id){
   catch(error){
 
     console.log(error);
+
+  }
+
+}
+function filterManageProducts(category){
+
+  const products =
+    document.querySelectorAll(
+      ".manage-product"
+    );
+
+  products.forEach((product)=>{
+
+    const productCategory =
+      product.dataset.category;
+
+    if(
+
+      category === "All" ||
+
+      productCategory === category
+
+    ){
+
+      product.style.display =
+        "block";
+
+    }
+    else{
+
+      product.style.display =
+        "none";
+
+    }
+
+  });
+
+}
+async function bulkUploadProducts(){
+
+  try{
+
+    const bulkData =
+      JSON.parse(
+
+        document.getElementById(
+          "bulk-products"
+        ).value
+
+      );
+
+    for(const product of bulkData){
+
+      await fetch(
+
+        `${API_URL}/api/products/add`,
+
+        {
+
+          method:"POST",
+
+          headers:{
+            "Content-Type":"application/json"
+          },
+
+          body:JSON.stringify(product)
+
+        }
+
+      );
+
+    }
+
+    showToast(
+      "Bulk Upload Successful 😄"
+    );
+
+    loadProducts();
+
+    loadManageProducts();
+
+  }
+  catch(error){
+
+    console.log(error);
+
+    alert(
+      "Invalid JSON Format"
+    );
 
   }
 
