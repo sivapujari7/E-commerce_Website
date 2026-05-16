@@ -313,7 +313,7 @@ router.post("/reset-password", async(req,res)=>{
 
     res.status(500).json({
 
-      message:"Server Error"
+      message:error.message
 
     });
 
