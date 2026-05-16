@@ -1439,3 +1439,26 @@ async function resetPassword(){
   }
 
 }
+const menuToggle =
+document.querySelector(".menu-toggle");
+
+const navLinks =
+document.querySelector(".nav-links");
+
+menuToggle.addEventListener("click",()=>{
+
+  navLinks.classList.toggle("show-menu");
+
+});
+function toggleMenu(){
+
+  const menu =
+    document.getElementById(
+      "mobile-menu"
+    );
+
+  menu.classList.toggle(
+    "show-menu"
+  );
+
+}
