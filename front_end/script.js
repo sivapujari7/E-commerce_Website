@@ -269,20 +269,29 @@ function searchProducts() {
 
   const input = $id("search-input")
     .value
-    .toLowerCase();
-
+    .toLowerCase()
+    .trim();
+    
   const products = document.querySelectorAll(
     "#product-container .product-card"
   );
 
   products.forEach(product => {
 
-    const name = product.dataset.name.toLowerCase();
+    const name =
+      product.dataset.name.toLowerCase();
 
-    product.style.display =
-      name.includes(input)
-        ? "block"
-        : "none";
+    if (name.includes(input)) {
+
+      product.style.display = "flex";
+
+      product.style.flexDirection = "column";
+
+    } else {
+
+      product.style.display = "none";
+
+    }
 
   });
 

@@ -862,8 +862,7 @@ footer{
 
   display:grid;
 
-  grid-template-columns:
-    repeat(auto-fit,minmax(280px,1fr));
+grid-template-columns:repeat(2,1fr);
 
   gap:24px;
 
@@ -941,5 +940,163 @@ video,
   backface-visibility:hidden;
 
   will-change:transform;
+
+}
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+/* Tablets */
+@media (max-width: 992px) {
+
+  .products-container,
+  .product-grid,
+  .shop-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+
+  .product-card {
+    width: 100%;
+  }
+
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .navbar,
+  .header,
+  .top-bar {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .products-container,
+  .product-grid,
+  .shop-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .product-card {
+    width: 100%;
+    border-radius: 12px;
+  }
+
+  .product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .product-title {
+    font-size: 14px;
+  }
+
+  .product-price {
+    font-size: 15px;
+  }
+
+  button {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .banner img,
+  .hero img {
+    height: auto;
+    width: 100%;
+  }
+
+}
+
+/* Small Phones */
+@media (max-width: 480px) {
+
+  .products-container,
+  .product-grid,
+  .shop-container {
+    grid-template-columns: 1fr;
+  }
+
+  h1, h2, h3 {
+    font-size: 18px;
+  }
+
+  .product-card img {
+    height: 220px;
+  }
+
+}
+/* MOBILE PRODUCT FIX */
+
+@media (max-width:768px){
+
+  .product-container{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:12px;
+
+    padding:10px;
+
+  }
+
+  .product-card{
+
+    width:100%;
+
+    max-width:100%;
+
+    border-radius:14px;
+
+  }
+
+  .product-card img{
+
+    height:140px;
+
+    object-fit:cover;
+
+  }
+
+  .product-card h3{
+
+    font-size:14px;
+
+    margin:10px;
+
+  }
+
+  .product-card p{
+
+    font-size:13px;
+
+    margin:0 10px 10px;
+
+  }
+
+  .product-card button{
+
+    width:calc(100% - 20px);
+
+    margin:8px 10px;
+
+    padding:10px;
+
+    font-size:13px;
+
+  }
 
 }
