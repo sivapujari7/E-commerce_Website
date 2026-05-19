@@ -114,6 +114,47 @@ if(category === "Shoes"){
   `;
 
 }
+if(category === "Electronics"){
+
+  container.innerHTML = `
+
+    <div
+      class="subcategory-card"
+      onclick="openSubCategory(
+        'Electronics'
+      )">
+
+      <img
+        src="images/electronics.jpg">
+
+      <h2>Electronics</h2>
+
+    </div>
+
+  `;
+
+}
+
+if(category === "Earphones"){
+
+  container.innerHTML = `
+
+    <div
+      class="subcategory-card"
+      onclick="openSubCategory(
+        'Earphones'
+      )">
+
+      <img
+        src="images/earphones.jpg">
+
+      <h2>Earphones</h2>
+
+    </div>
+
+  `;
+
+}
 
 function openSubCategory(sub){
 

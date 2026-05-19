@@ -1,110 +1,94 @@
-const product = JSON.parse(
+<!DOCTYPE html>
+<html lang="en">
 
-  localStorage.getItem(
-    "selectedProduct"
-  )
+<head>
 
-);
+  <meta charset="UTF-8">
 
-document.getElementById(
-  "product-title"
-).innerText = product.name;
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
-document.getElementById(
-  "product-price"
-).innerText = `₹${product.price}`;
+  <title>Categories</title>
 
-document.getElementById(
-  "product-category"
-).innerText =
-  product.category;
+  <link
+    rel="stylesheet"
+    href="style.css">
 
-document.getElementById(
-  "product-description"
-).innerText =
-  product.description;
+</head>
 
-const mainImage =
-  document.getElementById(
-    "main-product-image"
+<body>
+
+<section class="subcategory-page">
+
+  <h1 class="products-title">
+
+    Shop By Categories 😄🔥
+
+  </h1>
+
+  <div class="subcategory-container">
+
+    <div
+      class="subcategory-card"
+      onclick="openCategory('Fashion')">
+
+      <img src="images/fashion.jpg">
+
+      <h2>Fashion</h2>
+
+    </div>
+
+    <div
+      class="subcategory-card"
+      onclick="openCategory('Shoes')">
+
+      <img src="images/shoe.avif">
+
+      <h2>Shoes</h2>
+
+    </div>
+
+    <div
+      class="subcategory-card"
+      onclick="openCategory('Electronics')">
+
+      <img src="images/headphone.jpg">
+
+      <h2>Electronics</h2>
+
+    </div>
+
+    <div
+      class="subcategory-card"
+      onclick="openCategory('Watches')">
+
+      <img src="images/watches.avif">
+
+      <h2>Watches</h2>
+
+    </div>
+
+  </div>
+
+</section>
+
+<script>
+
+function openCategory(category){
+
+  localStorage.setItem(
+    "selectedCategory",
+    category
   );
 
-mainImage.src =
-  product.mainImage ||
-  product.images[0];
-
-const slider =
-  document.getElementById(
-    "image-slider"
-  );
-
-product.images.forEach((image)=>{
-
-  slider.innerHTML += `
-
-    <img src="${image}"
-      class="slider-image"
-      onclick="
-        changeImage('${image}')
-      ">
-
-  `;
-
-});
-
-function changeImage(image){
-
-  mainImage.src = image;
+  window.location.href =
+    "subcategory.html";
 
 }
-document.getElementById(
-  "add-cart-btn"
-).addEventListener(
 
-  "click",
+</script>
 
-  ()=>{
+</body>
 
-    let cart = JSON.parse(
-      localStorage.getItem("cart")
-    ) || [];
-
-    let existing =
-      cart.find(item =>
-        item.name === product.name
-      );
-
-    if(existing){
-
-      existing.quantity++;
-
-    }
-    else{
-
-      cart.push({
-
-        name:product.name,
-
-        price:product.price,
-
-        quantity:1,
-
-        image:product.mainImage
-
-      });
-
-    }
-
-    localStorage.setItem(
-
-      "cart",
-
-      JSON.stringify(cart)
-
-    );
-
-    alert("Product Added To Cart 😄🔥");
-
-  }
-
-);
+</html>

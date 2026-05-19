@@ -6,6 +6,13 @@ const product = JSON.parse(
 
 );
 
+if(!product){
+
+  window.location.href =
+    "index.html";
+
+}
+
 document.getElementById(
   "product-title"
 ).innerText = product.name;

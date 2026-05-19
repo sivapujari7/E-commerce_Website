@@ -1,240 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="XStore Ecommerce Website" />
 
-  <title>XStore Ecommerce</title>
+  <meta charset="UTF-8">
 
-  <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <title>Product Details</title>
+
+  <link rel="stylesheet"
+    href="style.css">
+
 </head>
-
 <body>
+  <div class="product-page">
+  <div class="floating-cart">
 
-  <!-- ================= NAVBAR ================= -->
+  <button onclick="goToHomeCart()">
 
-  <header>
-    <nav class="navbar">
+    🛒 Cart
 
-      <div class="logo">XStore</div>
+  </button>
 
-      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Menu">
-        ☰
-      </button>
-
-      <div class="search-box">
-        <input
-          type="text"
-          id="search-input"
-          placeholder="Search Products..."
-          autocomplete="off"
-          onkeyup="searchProducts()"
-        />
-      </div>
-
-      <ul class="nav-links" id="mobile-menu">
-
-        <li><a href="#">Home</a></li>
-
-        <li>
-          <a href="#" onclick="toggleCart()">
-            Cart 🛒
-            <span id="cart-count">0</span>
-          </a>
-        </li>
-
-        <li>
-          <button id="login-btn" onclick="openLogin()">
-            Login
-          </button>
-        </li>
-
-        <li>
-          <button onclick="toggleTheme()">
-            🌙
-          </button>
-        </li>
-
-        <li>
-          <button onclick="checkAdminAccess()">
-            Admin
-          </button>
-        </li>
-
-      </ul>
-
-    </nav>
-  </header>
-
-  <!-- ================= HERO ================= -->
-
-  <main>
-
-    <section class="hero">
-
-      <video autoplay muted loop playsinline id="hero-video">
-        <source src="videos/hero-video.mp4" type="video/mp4" />
-      </video>
-
-      <div class="hero-overlay"></div>
-
-      <div class="hero-content">
-
-        <h1 id="hero-title">
-          Welcome to XStore ❤️
-        </h1>
-
-        <p>
-          Experience Best Shopping products at our website! 🤩
-        </p>
-
-        <button onclick="goToCategories()">
-          Shop Now
-        </button>
-
-      </div>
-
-    </section>
-
-    <!-- ================= TRENDING PRODUCTS ================= -->
-
-    <section class="products">
-
-      <h2>Trending Products 🔥</h2>
-
-      <div class="product-container" id="trending-container"></div>
-
-      <div class="trending-cat">
-        <img src="images/trending-cat.jpg" alt="Trending Products" />
-      </div>
-
-    </section>
-
-    <!-- ================= PRODUCTS ================= -->
-
-    <section class="products">
-
-      <h2 class="products-title">
-        Products We Have 😄🔥
-      </h2>
-
-      <div class="product-container" id="product-container"></div>
-
-    </section>
-
-  </main>
-
-  <!-- ================= CART SIDEBAR ================= -->
-
-  <aside class="cart-sidebar" id="cart-sidebar">
-
-    <h2>Your Cart</h2>
-
-    <div id="cart-items"></div>
-
-    <h3 id="total-price">
-      Total: ₹0
-    </h3>
-
-    <button class="checkout-btn" onclick="openPayment()">
-      Checkout
-    </button>
-
-  </aside>
-
-  <!-- ================= LOGIN POPUP ================= -->
-
-  <div class="popup" id="login-popup">
-
-    <div class="popup-content">
-
-      <span class="close-btn" onclick="closeLogin()">✖</span>
-
-      <h2>Login</h2>
-
-      <input type="email" id="login-email" placeholder="Enter Email" />
-
-      <input type="password" id="login-password" placeholder="Enter Password" />
-
-      <p class="forgot-link" onclick="openForgotPassword()">
-        Forgot Password?
-      </p>
-
-      <button onclick="loginUser()">
-        Login
-      </button>
-
-      <p>
-        Don't have account?
-        <span onclick="openRegister()">Register</span>
-      </p>
-
-    </div>
+</div>
+  <div class="product-images">
+  <div
+    id="image-slider"
+    class="image-slider">
 
   </div>
 
-  <!-- ================= REGISTER POPUP ================= -->
+  <img
+    id="main-product-image"
+    class="main-product-image">
 
-  <div class="popup" id="register-popup">
+</div>
 
-    <div class="popup-content">
+    <div class="product-info">
 
-      <span class="close-btn" onclick="closeRegister()">✖</span>
+      <h1 id="product-title"></h1>
 
-      <h2>Register</h2>
+      <h2 id="product-price"></h2>
 
-      <input type="text" id="register-name" placeholder="Enter Name" />
+      <p id="product-category"></p>
 
-      <input type="email" id="register-email" placeholder="Enter Email" />
+      <p id="product-description"></p>
 
-      <input type="password" id="register-password" placeholder="Enter Password" />
-
-      <button onclick="registerUser()">
-        Register
+      <button id="add-cart-btn">
+        Add To Cart
       </button>
 
     </div>
 
   </div>
 
-  <!-- ================= PAYMENT POPUP ================= -->
+  <script src="product.js"></script>
 
-  <div class="popup" id="payment-popup">
 
-    <div class="popup-content">
+  
+<script>
 
-      <span class="close-btn" onclick="closePayment()">✖</span>
+function goToHomeCart(){
 
-      <h2>Select Payment Method</h2>
+  localStorage.setItem(
+    "openCart",
+    "true"
+  );
 
-      <div class="payment-options">
+  window.location.href =
+    "index.html";
 
-        <button onclick="payNow('PhonePe')">
-          PhonePe
-        </button>
+}
 
-        <button onclick="payNow('Paytm')">
-          Paytm
-        </button>
-
-        <button onclick="payNow('Cash On Delivery')">
-          Cash On Delivery
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- ================= FOOTER ================= -->
-
-  <footer>
-    <p>© 2026 XStore Ecommerce Website</p>
-  </footer>
+</script>
 
 </body>
 

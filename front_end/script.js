@@ -894,6 +894,7 @@ window.addEventListener(
 
     loadProducts();
 
+
     const openCart =
       localStorage.getItem("openCart");
 
@@ -907,3 +908,9 @@ window.addEventListener(
 
   }
 );
+function goToCategories() {
+
+  window.location.href =
+    "categories.html";
+
+}
